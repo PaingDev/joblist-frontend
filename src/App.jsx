@@ -1,5 +1,3 @@
-// import { useState } from 'react'
-//import { Row } from 'antd'
 import './App.css'
 import ViewOrderPage from './pages/ViewOrderPage'
 

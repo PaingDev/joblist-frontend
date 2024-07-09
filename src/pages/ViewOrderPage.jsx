@@ -10,7 +10,8 @@ import {
 } from '@ant-design/icons';
 
 
-import orderlist from "./dummy_order.json"
+// import orderlist from "./dummy_order.json"
+import { useState } from "react";
 
 const columns = [
     {
@@ -18,7 +19,7 @@ const columns = [
         dataIndex: 'account',
         key: 'account',
         render: (text) => (
-            <span style={{color: 'var(--primary-text-color)', fontWeight: 700}}>{text}</span>
+            <span style={{ color: 'var(--primary-text-color)', fontWeight: 700 }}>{text}</span>
         )
     },
     {
@@ -81,18 +82,22 @@ const columns = [
         render: (text) => (
             <span>{text}&nbsp;<Button shape="circle" size="small" icon={<EllipsisOutlined />} /></span>
         )
-
-        
     },
 ];
 
 
 function ViewOrderPage() {
 
+    const [tradeList, setTradeList] = useState();
+
+    const handleTradeList = (data) => {
+        setTradeList(data);
+    };
+
     return (
         <div>
-            <SearchBar />
-            <Table dataSource={orderlist} columns={columns} rowKey="account"  scroll expandable={{
+            <SearchBar handleTradeList={handleTradeList} />
+            <Table dataSource={tradeList} columns={columns} rowKey="account" scroll expandable={{
                 expandedRowRender: (record) => (
                     expandFunction(record)
                 ),
@@ -102,7 +107,7 @@ function ViewOrderPage() {
                         <DownOutlined onClick={e => onExpand(record, e)} />
                     ) : (
                         <RightOutlined onClick={e => onExpand(record, e)} />
-                    ),                
+                    ),
             }}>
 
             </Table>
@@ -123,47 +128,47 @@ function expandFunction(record) {
     >
         <Row gutter={[0, 10]}>
             <Col xs={24} md={6}>
-                <span style={{color: 'var(--primary-text-color)', fontWeight: 700}}>FIRST-NAME LAST-NAME (10103ZA - US margin)</span>
+                <span style={{ color: 'var(--primary-text-color)', fontWeight: 700 }}>FIRST-NAME LAST-NAME (10103ZA - US margin)</span>
             </Col>
             <Col xs={24} md={13}>
-                <Button style={{color: "var(--button-dark-text-color)"}} shape="round" iconPosition="end" icon={<ExportOutlined />}>Full review details</Button>
+                <Button style={{ color: "var(--button-dark-text-color)" }} shape="round" iconPosition="end" icon={<ExportOutlined />}>Full review details</Button>
             </Col>
             <Col xs={14} md={4}>
                 <Button style={{ paddingLeft: 23, paddingRight: 23 }} type="primary" shape="round" >Accept</Button>
                 <Button style={{ marginLeft: 5, paddingLeft: 23, paddingRight: 23 }} danger shape="round" iconPosition="end" icon={<DownOutlined />}>Reject</Button>
             </Col>
         </Row>
-        <Divider style={{margin: 4}}/>
-        <Row style={{marginTop: 4}}>
+        <Divider style={{ margin: 4 }} />
+        <Row style={{ marginTop: 4 }}>
             <Col xs={12} sm={12} md={6}>
-                Net Amount: &nbsp;<span style={{fontWeight: 700}}>{record.netAmount}</span>
+                Net Amount: &nbsp;<span style={{ fontWeight: 700 }}>{record.netAmount}</span>
             </Col>
             <Col xs={12} sm={12} md={6}>
-                Price: &nbsp;<span style={{fontWeight: 700}}>{record.price}</span>
+                Price: &nbsp;<span style={{ fontWeight: 700 }}>{record.price}</span>
             </Col>
             <Col xs={12} sm={12} md={6}>
-                Exchange Rate: &nbsp;<span style={{fontWeight: 700}}>{record.exchangeRate}</span>
+                Exchange Rate: &nbsp;<span style={{ fontWeight: 700 }}>{record.exchangeRate}</span>
             </Col>
             <Col xs={12} sm={12} md={6}>
-                O/S Limit: &nbsp;<span style={{fontWeight: 700}}>{record.osLimit}</span>
-            </Col>
-        </Row>
-        <Row style={{marginTop: 10}}>
-            <Col xs={12} sm={12} md={6}>
-                Reference Number: &nbsp;<span style={{fontWeight: 700}}>{record.noOfRef}</span>
-            </Col>
-            <Col xs={12} sm={12} md={6}>
-                Date / Time: &nbsp;<span style={{fontWeight: 700}}>{record.date}</span>
-            </Col>
-            <Col xs={12} sm={12} md={6}>
-                Telephone: &nbsp;<span style={{fontWeight: 700}}>{record.telephone}</span>
-            </Col>
-            <Col xs={12} sm={12} md={6}>
-                UserId: &nbsp;<span style={{fontWeight: 700}}>{record.userId}</span>
+                O/S Limit: &nbsp;<span style={{ fontWeight: 700 }}>{record.osLimit}</span>
             </Col>
         </Row>
-        <div style={{background: "var(--grey-background-color)", margin: 0, padding: 12}}>
-            <h4 style={{color: "var(--darkblue-text-color)"}}>Warning(s)</h4>
+        <Row style={{ marginTop: 10 }}>
+            <Col xs={12} sm={12} md={6}>
+                Reference Number: &nbsp;<span style={{ fontWeight: 700 }}>{record.noOfRef}</span>
+            </Col>
+            <Col xs={12} sm={12} md={6}>
+                Date / Time: &nbsp;<span style={{ fontWeight: 700 }}>{record.date}</span>
+            </Col>
+            <Col xs={12} sm={12} md={6}>
+                Telephone: &nbsp;<span style={{ fontWeight: 700 }}>{record.telephone}</span>
+            </Col>
+            <Col xs={12} sm={12} md={6}>
+                UserId: &nbsp;<span style={{ fontWeight: 700 }}>{record.userId}</span>
+            </Col>
+        </Row>
+        <div style={{ background: "var(--grey-background-color)", margin: 0, padding: 12 }}>
+            <h4 style={{ color: "var(--darkblue-text-color)" }}>Warning(s)</h4>
             <ul>
                 <li>To trade this security in this account, a currency conversion will be made at the current rate.</li>
                 <li>A similar order has already been submitted.</li>
@@ -173,7 +178,7 @@ function expandFunction(record) {
                 <li>For the above-mentioned reason(s), your order will be processed by one of our representatives.</li>
             </ul>
         </div>
-        
+
 
     </div>;
 }
