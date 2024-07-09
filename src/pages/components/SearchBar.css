@@ -1,0 +1,20 @@
+
+
+.search-bar{
+    padding: 5px;
+}
+.search-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--dark-text-color);    
+}
+
+.search-label {
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--light-text-color);
+}
+
+.custom-form-item .ant-form-item-label > label {
+    color: var(--main-text-color); 
+}

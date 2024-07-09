@@ -1,0 +1,4 @@
+
+.order-table .ant-table-thead > tr > th {
+    color: var(--dark-text-color); /* Set your desired color here */
+}
